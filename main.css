@@ -1,0 +1,117 @@
+:root {
+    --main-color: #dc4c3e;
+    --white: white;
+    --background: #EEEEEE;
+}
+
+
+html {
+    font-family: sans-serif;
+
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--background);
+}
+
+header {
+    background-color: var(--main-color);
+    width: 100vw;
+    text-align: center;
+    color: var(--white);
+}
+
+body,
+div,
+form,
+input,
+select,
+p,
+textarea {
+    padding: 0;
+    margin: 0;
+    outline: none;
+    font-family: Roboto, Arial, sans-serif;
+    font-size: 16px;
+    color: var(--main-color);
+}
+
+input:focus,
+textarea:focus {
+    color: #000;
+}
+
+h1,
+h2 {
+    text-transform: uppercase;
+    font-weight: 400;
+}
+
+h2 {
+    margin: 0 0 0 8px;
+}
+
+form {
+    background: var(--white);
+}
+
+input,
+select,
+textarea {
+    padding: 5px;
+    margin-bottom: 30px;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--main-color);
+}
+
+
+.champ_nouvelle_idee {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    padding: 25px;
+}
+
+.champ_nouvelle_idee label {
+    display: flex;
+    width: 18vw;
+    justify-content: center;
+    text-align: center;
+}
+
+.champ_nouvelle_idee>div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 40vw;
+    background-color: var(--background );
+    margin: 10px;
+    padding: 15px;
+    border-radius: 5px;
+}
+
+button {
+    width: 100%;
+}
+
+button:hover,
+.btn-item:hover {
+    background: #85d6de;
+}
+
+@media (min-width: 568px) {
+
+    html,
+    body {
+        height: 100%;
+    }
+}

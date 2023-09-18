@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Boite à idées</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script src='script.js'></script>
+    <script src="https://kit.fontawesome.com/22a694dfe1.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+<header>
+    <h1>Ma boite à idées</h1>
+</header>
+    <div>
+        <div class="affiche_formulaire_idee" id="affiche_formulaire_idee" onclick="show_idea_form()">
+            <span>
+                J'ai une idée!
+                <i class="fa-regular fa-lightbulb"></i>
+            </span>
+        </div>
+        <div class="masque_formulaire_idee" id="masque_formulaire_idee" style="display: none;" onclick="hide_idea_form()">
+            <span>
+                J'ai changé d'avis
+
+            </span>
+        </div>
+        <form action="index.php" method="post">
+            <div class="champ_nouvelle_idee" id="champ_nouvelle_idee" style="display: none;">
+                <h2>Dis nous en plus !</h2>
+
+                <div>
+                    <input type="text" name="titre_idee" id="titre_idee" placeholder="Donne un titre à ton idée">
+                </div>
+                <div>
+                    <input type="text" name="nom_user" id="nom_user" placeholder="Ton nom complet">
+                </div>
+                <div>
+                    <select name="select_categorie" id="select_categorie">
+                        <option value="default" selected>Selectionne la catégorie</option>
+                    </select>
+                </div>
+                <div>
+                    <textarea name="contenu_idee" id="contenu_idee" cols="30" rows="10" placeholder="Parle nous de ton idée !"></textarea>
+                </div>
+
+
+                <input type="button">
+
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>
