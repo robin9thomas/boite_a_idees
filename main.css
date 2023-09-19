@@ -2,6 +2,7 @@
     --main-color: #dc4c3e;
     --white: white;
     --background: #EEEEEE;
+    --input_background: #f1f1f1;
 }
 
 
@@ -26,6 +27,13 @@ header {
     color: var(--white);
 }
 
+main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+
 body,
 div,
 form,
@@ -47,9 +55,21 @@ textarea:focus {
 }
 
 h1,
-h2 {
+h2,
+h3,
+h4,
+h5 {
     text-transform: uppercase;
     font-weight: 400;
+    padding: 0%;
+    margin: 0%;
+}
+
+h3,
+h4,
+h5 {
+    padding: 0%;
+    margin: 0%;
 }
 
 h2 {
@@ -64,48 +84,100 @@ input,
 select,
 textarea {
     padding: 5px;
-    margin-bottom: 30px;
-    background: transparent;
+    background: var(--input_background);
     border: none;
     border-bottom: 1px solid var(--main-color);
 }
 
 
-.champ_nouvelle_idee {
-    display: flex;
+#champ_nouvelle_idee {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100%;
-    padding: 25px;
+    padding: 10px;
 }
 
-.champ_nouvelle_idee label {
-    display: flex;
-    width: 18vw;
-    justify-content: center;
-    text-align: center;
-}
 
-.champ_nouvelle_idee>div {
+
+.input_wrapper {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    width: 40vw;
+    width: 25vw;
     background-color: var(--background );
-    margin: 10px;
-    padding: 15px;
+    margin: 5px;
+    padding: 5px;
     border-radius: 5px;
 }
 
-button {
-    width: 100%;
-}
 
-button:hover,
+
+
 .btn-item:hover {
     background: #85d6de;
+}
+
+.hidden {
+    margin-top: -800px;
+    transition: all 1s ease-in-out;
+}
+
+.visible{
+    display: flex;
+    margin-top: 0px;
+    transition: all 1s ease-in-out;
+}
+
+.button_wrapper{
+    display: flex;
+    justify-content: center;
+    border-radius: 25px;
+    width: 20vw;
+    height: 5vh;
+    background-color: var(--main-color);
+    margin: 20px;
+    border: solid 3px var(--main-color);
+}
+
+.button_wrapper:hover{
+    background-color: var(--white);
+}
+
+button{
+    width: 100%;
+    background: transparent;
+    border: none;
+    color: var(--white);
+}
+
+button:hover{
+       color: var(--main-color); 
+}
+
+.ideas_wrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--white );
+    width: 60vw;
+    padding: 10px;
+    margin-top: 15px;
+}
+
+.idea{
+    width: 95%;
+    padding: 15px;
+    border: solid 1px var(--main-color);
+    border-radius: 5px;
+}
+
+.en-tete_idee{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
 }
 
 @media (min-width: 568px) {
