@@ -18,27 +18,31 @@ class idees{
         global $mysql;
         $count = 0;
         $req_sel = "
-        SELECT `id_idee`,
-               `nom_utilisateur`, 
-               `contenue_idee`, 
-               `id_categorie`,
-               `titre_idee`,
-               `date_creation`
-        FROM `idees`
+        SELECT  idees.id_idee,
+                idees.id_categorie,
+                idees.nom_utilisateur,
+                idees.contenue_idee,
+                idees.titre_idee,
+                idees.date_creation,
+                categorie.nom_categorie
+        FROM idees
+        INNER JOIN categorie ON idees.id_categorie = categorie.id_categorie
+        GROUP BY idees.id_idee;
         ";
 
         $result = $mysql->query($req_sel);
-        
-        while ($array_result = $result->fetch_assoc()) {
-            $idee_liste[$count]['id_idee'] = $array_result['id_idee'];
-            $idee_liste[$count]['nom_utilisateur'] = $array_result['nom_utilisateur'];
-            $idee_liste[$count]['contenue_idee'] = $array_result['contenue_idee'];
-            $idee_liste[$count]['id_categorie'] = $array_result['id_categorie'];
-            $idee_liste[$count]['titre_idee'] = $array_result['titre_idee'];
-            $idee_liste[$count]['date_creation'] = $array_result['date_creation'];
 
+        while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+            $idee_liste[$count]['id_idee'] = $row['id_idee'];
+            $idee_liste[$count]['nom_utilisateur'] = $row['nom_utilisateur'];
+            $idee_liste[$count]['contenue_idee'] = $row['contenue_idee'];
+            $idee_liste[$count]['id_categorie'] = $row['id_categorie'];
+            $idee_liste[$count]['nom_categorie'] = $row['nom_categorie'];
+            $idee_liste[$count]['titre_idee'] = $row['titre_idee'];
+            $idee_liste[$count]['date_creation'] = $row['date_creation']; 
+            
             $count++;
-        }
+        } 
 
         return $idee_liste;
     } 

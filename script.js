@@ -43,3 +43,18 @@ function valider_Formulaire() {
 
     return true;
 }
+
+function changer_theme(){
+    const fichier_css = document.getElementById("css-link");
+
+    let fichier_actuel = fichier_css.getAttribute("href");
+
+    if (fichier_actuel === "light.css") {
+        fichier_css.href = "dark.css";
+        fichier_actuel = "dark.css";
+    } else {
+        fichier_css.href = "light.css"; 
+        fichier_actuel = "light.css";
+    }
+    
+};

@@ -5,7 +5,7 @@ class bdd{
     private $username;
     private $password;
     private $database;
-    private $mysql;
+    private $pdo;
 
     public function __construct($host, $username, $password, $database) {
         $this->host = $host;
@@ -15,25 +15,30 @@ class bdd{
     }
 
     public function connect() {
-        $this->mysql = new mysqli($this->host, $this->username, $this->password, $this->database);
-
-        if ($this->mysql->connect_error) {
-            die("Connexion échouée : " . $this->mysql->connect_error);
+        try {
+            $this->pdo = new PDO('mysql:host='.$this->host.';dbname='.$this->database, $this->username, $this->password);
+            $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        } catch (PDOException $e) {
+            die("Erreur de connexion à la base de données : " . $e->getMessage());
         }
-
-        return $this->mysql;
     }
 
     public function query($req) {
-        $result = $this->mysql->query($req);
-        return $result;
+        try {
+            $stmt = $this->pdo->prepare($req);
+            
+        
+            $stmt->execute();
+        
+        } catch (PDOException $e) {
+            echo "Erreur : " . $e->getMessage();
+        }
+        return $stmt;
     }
 
 
     public function close() {
-        if ($this->mysql) {
-            $this->mysql->close();
-        }
+        $pdo = null;
     }
   
 }

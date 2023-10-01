@@ -15,44 +15,51 @@
 <header>
     <h1>Ma boite à idées</h1>
 </header>
-    <div>
-        <div class="affiche_formulaire_idee" id="affiche_formulaire_idee" onclick="show_idea_form()">
-            <span>
-                J'ai une idée!
-                <i class="fa-regular fa-lightbulb"></i>
-            </span>
+    <main>
+        <div class="button_wrapper">
+            <button id="toggle_button" onclick="manage_form()">J'ai une idée!</button>
         </div>
-        <div class="masque_formulaire_idee" id="masque_formulaire_idee" style="display: none;" onclick="hide_idea_form()">
-            <span>
-                J'ai changé d'avis
-
-            </span>
-        </div>
+        
         <form action="index.php" method="post">
-            <div class="champ_nouvelle_idee" id="champ_nouvelle_idee" style="display: none;">
+            <div class="hidden" id="champ_nouvelle_idee" >
                 <h2>Dis nous en plus !</h2>
 
-                <div>
+                <div class="input_wrapper">
                     <input type="text" name="titre_idee" id="titre_idee" placeholder="Donne un titre à ton idée">
                 </div>
-                <div>
+                <div class="input_wrapper">
                     <input type="text" name="nom_user" id="nom_user" placeholder="Ton nom complet">
                 </div>
-                <div>
+                <div class="input_wrapper">
                     <select name="select_categorie" id="select_categorie">
                         <option value="default" selected>Selectionne la catégorie</option>
                     </select>
                 </div>
-                <div>
+                <div class="input_wrapper">
                     <textarea name="contenu_idee" id="contenu_idee" cols="30" rows="10" placeholder="Parle nous de ton idée !"></textarea>
                 </div>
-
-
-                <input type="button">
-
+                <div class="button_wrapper">
+                    <button type="submit" onsubmit="valider_Formulaire()">Envoyer mon idée.</button>
+                </div>
             </div>
         </form>
-    </div>
+        <div class="ideas_wrapper">
+            <div class="idea">
+                <div class="en-tete_idee">
+                    <h3>Robin THOMAS</h3>
+                    <span>19/09/2023</span>
+                </div>        
+                <div class="corps_idee">
+                    <h4>Titre: Tâches à éfféctuer</h4>
+                    <h5>Catégorie: BDD Query</h5>
+                    <h5>L'idée:</h5>
+                   <span>
+                        Il faudrait tester la connexion a la bdd ainsi que les query!
+                    </span> 
+                </div>
+            </div>
+        </div>
+    </main>
 </body>
 
 </html>

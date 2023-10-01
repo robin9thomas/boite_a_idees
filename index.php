@@ -2,9 +2,9 @@
 include "config.php";
 
     if(isset($_POST['Envoyer'])){
-        $nom_utilisateur = $_POST['nom_user'];
-        $titre_idee = $_POST['titre_idee'];
-        $contenu_idee= $_POST['contenu_idee'];
+        $nom_utilisateur = strip_tags($_POST['nom_user']);
+        $titre_idee = strip_tags($_POST['titre_idee']);
+        $contenu_idee= strip_tags($_POST['contenu_idee']);
         $id_categorie= $_POST['select_categorie'];
 
         $idee = new idees();
@@ -21,6 +21,7 @@ include "config.php";
     <title>Boite à idées</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="main.css">
+    <link id="css-link" rel="stylesheet" type="text/css" href="light.css">
     <script src="script.js"></script>
     <script src="https://kit.fontawesome.com/22a694dfe1.js" crossorigin="anonymous"></script>
 </head>
@@ -39,7 +40,12 @@ unset($categorie);
 $header = "
 
 <header>
-    <h1>Ma boite à idées</h1>
+    <div class=\"header_inner_left\">
+        <h1>Ma boite à idées</h1>
+    </div>
+    <div class=\"header_inner_right\">
+        <i class=\"fa-solid fa-circle-half-stroke\" style='font-size: larger;' onclick=\"changer_theme()\"></i>
+    </div>
 </header>
     <main>";
 
@@ -82,10 +88,7 @@ $ideas = "
         <div class='ideas_wrapper'>
 ";       
         
- foreach($liste_idees as $element_idee){
-        $categorie = new categorie();
-        $categorie_nom = $categorie->load_nom($element_idee['id_categorie']);
-
+ foreach($liste_idees as $element_idee){        
         $ideas .= "
             <div class='idea'>
                 <div class='en-tete_idee'>
@@ -93,12 +96,15 @@ $ideas = "
                     <span>".$element_idee['date_creation']."</span>
                 </div>        
                 <div class='corps_idee'>
-                    <h4>Titre: ".$element_idee['titre_idee']."</h4>
-                    <h5>Catégorie: ".$categorie_nom."</h5>
-                    <h5>L'idée:</h5>
-                   <span>
-                   ".$element_idee['contenue_idee']."
-                    </span> 
+                    <h4 class=\"titre_idee\">Titre: ".$element_idee['titre_idee']."</h4>
+                    <h5 class=\"categorie_idee\">Catégorie: ".$element_idee['nom_categorie']."</h5>
+                    
+                    <div class=\"contenu_idee\">
+                        <h5>L'idée:</h5>
+                        <span>
+                            ".$element_idee['contenue_idee']."
+                        </span>
+                    </div> 
                 </div>
             </div>
                  ";
