@@ -1,15 +1,24 @@
 <?php 
-include "config.php";
+require_once("config.php");
 
-    if(isset($_POST['Envoyer'])){
+    if(isset($_POST['envoyer_idee'])){
         $nom_utilisateur = strip_tags($_POST['nom_user']);
         $titre_idee = strip_tags($_POST['titre_idee']);
         $contenu_idee= strip_tags($_POST['contenu_idee']);
-        $id_categorie= $_POST['select_categorie'];
+        $id_categorie= strip_tags($_POST['select_categorie']);
 
         $idee = new idees();
         $idee->add($nom_utilisateur, $contenu_idee, $id_categorie, $titre_idee);
         unset($idee);
+        
+    }
+
+    if(isset($_POST['envoyer_categorie'])){
+        $nouvelle_categorie= strip_tags($_POST['nouvelle_categorie']);
+
+        $categorie = new categorie();
+        $categorie ->add($nouvelle_categorie);
+        unset($categorie);
     }
 ?>
 <!DOCTYPE html>
@@ -52,37 +61,56 @@ $header = "
 $idea_form = "<div class='button_wrapper'>
 <button id='toggle_button' onclick='manage_form()'>J'ai une idée!</button>
 </div>
-
 <form action='index.php' method='post'>
-<div class='hidden' id='champ_nouvelle_idee' >
-    <h2>Dis nous en plus !</h2>
+    <div class='hidden' id='champ_nouvelle_idee'>  
+        <h2>Dis nous en plus !</h2>
 
-    <div class='input_wrapper'>
-        <input type='text' name='titre_idee' id='titre_idee' placeholder='Donne un titre à ton idée' required pattern=\"[a-zA-ZÀ-ÖØ-öø-ÿ-' ]\">
-    </div>
-    <div class='input_wrapper'>
-        <input type='text' name='nom_user' id='nom_user' placeholder='Ton nom complet' required pattern=\"[a-zA-ZÀ-ÖØ-öø-ÿ-' ]\">
-    </div>
-    <div class='input_wrapper'>
-        <select name='select_categorie' id='select_categorie'>
-            <option value='default' selected>Selectionne la catégorie</option>";
+        <div class='input_wrapper'>
+            <input type='text' name='titre_idee' id='titre_idee' 
+            placeholder='Donne un titre à ton idée' required pattern=\"[a-zA-ZÀ-ÖØ-öø-ÿ-' ]\">
+        </div>
+        <div class='input_wrapper'>
+            <input type='text' name='nom_user' id='nom_user' placeholder='Ton nom complet' required 
+            pattern=\"[a-zA-ZÀ-ÖØ-öø-ÿ-' ]\">
+        </div>
+        <div class='input_wrapper'>
+            <select name='select_categorie' id='select_categorie'>
+                <option value='default' selected>Selectionne la catégorie</option>";
 
 foreach($liste_categorie as $element_categorie){
-   
-    $idea_form .=  "<option value='".$element_categorie['id_categorie']."'>".$element_categorie['nom_categorie']."</option>";
+    if($element_categorie['validation'] == 1){
+        $idea_form .=  "<option value='".$element_categorie['id_categorie']."'>".$element_categorie['nom_categorie']."</option>";
+    }
 }
 
 $idea_form .=  "
-        </select>
+            </select>
+            <i class=\"fa-solid fa-plus\" id='ouvrir_categorie' onclick=\"ajout_categorie()\"></i>
+            <i class=\"fa-solid fa-minus\" id='fermer_categorie' onclick=\"ajout_categorie()\" style=\"display:none;\"></i>
+        </div>
+        <div class='input_wrapper'>
+            <textarea name='contenu_idee' id='contenu_idee' cols='30' rows='10' placeholder='Parle nous de ton idée !'></textarea required pattern=\"[a-zA-ZÀ-ÖØ-öø-ÿ-' ]\">
+        </div>
+        <div class='button_wrapper'>
+            <button type='submit' name='envoyer_idee'>Envoyer mon idée.</button>
+        </div>
     </div>
-    <div class='input_wrapper'>
-        <textarea name='contenu_idee' id='contenu_idee' cols='30' rows='10' placeholder='Parle nous de ton idée !'></textarea required pattern=\"[a-zA-ZÀ-ÖØ-öø-ÿ-' ]\">
+</form>
+
+<form action='index.php' method='post'>
+    <div id='nouvelle_categorie_conteneur' style='display:none;'>
+        <div class='input_wrapper'>
+            <input type='text' name='nouvelle_categorie' id='nouvelle_categorie' 
+                placeholder='La catégorie à ajouter' required 
+                pattern=\"[a-zA-ZÀ-ÖØ-öø-ÿ-' ]\">    
+        </div>
+        <div class='button_wrapper'>
+            <button type='submit' name='envoyer_categorie'>Soumettre catégorie.</button>   
+        </div>
     </div>
-    <div class='button_wrapper'>
-        <button type='submit' name='Envoyer'>Envoyer mon idée.</button>
-    </div>
-</div>
-</form>";
+</form>
+"
+;
 
 $ideas = "
         <div class='ideas_wrapper'>

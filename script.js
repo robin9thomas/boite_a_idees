@@ -44,6 +44,22 @@ function valider_Formulaire() {
     return true;
 }
 
+function ajout_categorie(){
+    const conteneur_categorie = document.getElementById("nouvelle_categorie_conteneur");
+    const fermer_nouvelle_categorie = document.getElementById("fermer_categorie");
+    const ouvrir_nouvelle_categorie = document.getElementById("ouvrir_categorie");
+
+    if(conteneur_categorie.style.display ==="none"){
+        conteneur_categorie.style.display ="flex" ;
+        fermer_nouvelle_categorie.style.display ="block";
+        ouvrir_nouvelle_categorie.style.display ="none";
+    }else{
+        conteneur_categorie.style.display ="none" ;
+        fermer_nouvelle_categorie.style.display ="none";
+        ouvrir_nouvelle_categorie.style.display ="block";
+    }
+}
+
 function changer_theme(){
     const fichier_css = document.getElementById("css-link");
 

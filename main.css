@@ -93,7 +93,7 @@ textarea {
 }
 
 
-#champ_nouvelle_idee {
+#champ_nouvelle_idee, #nouvelle_categorie_conteneur{
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -189,6 +189,23 @@ button{
 .contenu_idee{
     padding-left: 15px;
 }
+
+.erreur,.succes{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 5vh;
+}
+
+.erreur{
+    color: red;
+}
+
+.succes{
+    color: green;
+}
+
 @media (min-width: 568px) {
 
 

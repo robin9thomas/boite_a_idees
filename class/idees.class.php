@@ -23,7 +23,7 @@ class idees{
                 idees.nom_utilisateur,
                 idees.contenue_idee,
                 idees.titre_idee,
-                idees.date_creation,
+                DATE_FORMAT(idees.date_creation, \"%d/%m/%Y\") AS date_creation,
                 categorie.nom_categorie
         FROM idees
         INNER JOIN categorie ON idees.id_categorie = categorie.id_categorie
@@ -65,8 +65,16 @@ class idees{
                 CURRENT_DATE)"
         ;
 
-        $mysql->query($req_insert);
+        $result = $mysql->query($req_insert);
 
-    
+        if ($result->rowCount() > 0) {
+            echo "<div class=\"succes\">
+                    L'idée à bien été ajoutée, merci pour ton aide!
+                  </div>";
+        } else {
+            echo "<div class=\"erreur\">
+                     L'ajout de l'idée à échoué...
+                  </div>";;
+        }
     }
 }
